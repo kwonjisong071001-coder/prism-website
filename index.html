@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #1a0e0e;
@@ -19,7 +19,7 @@
     --line: #2b1c1c;
     --line-strong: #3a2626;
     --accent: #e8533f;
-    --accent-soft: rgba(232, 83, 63, 0.12);
+    --label: #8a7568;
 
     --display: 'Archivo', 'Pretendard Variable', sans-serif;
     --serif: 'Fraunces', 'Pretendard Variable', serif;
@@ -37,9 +37,9 @@
     overflow-x: hidden;
     line-height: 1.55;
   }
-  ::selection { background: var(--accent); color: var(--bg); }
+  ::selection { background: var(--fg); color: var(--bg); }
+  a { color: inherit; text-decoration: none; }
 
-  /* grain overlay */
   body::before {
     content: '';
     position: fixed;
@@ -51,53 +51,24 @@
     mix-blend-mode: overlay;
   }
 
-  a { color: inherit; text-decoration: none; }
-
-  /* ───────── RECRUIT BANNER ───────── */
-  .top-banner {
-    background: var(--accent);
-    color: var(--bg);
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 9px 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    text-align: center;
-  }
-  .top-banner .pulse {
-    width: 6px; height: 6px;
-    background: var(--bg);
-    border-radius: 50%;
-    animation: pulse 1.8s infinite;
-  }
-  .top-banner a {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    text-decoration-thickness: 1px;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
   /* ───────── NAV ───────── */
   nav {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 20px 48px;
+    padding: 22px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: transparent;
+    transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled {
     background: rgba(26, 14, 14, 0.82);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid var(--line);
+    border-bottom-color: var(--line);
   }
 
   .logo {
@@ -108,6 +79,17 @@
     display: flex;
     align-items: center;
     gap: 11px;
+    color: var(--fg);
+  }
+  .logo-tag {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    color: var(--fg-mute);
+    letter-spacing: 0.18em;
+    font-weight: 400;
+    margin-left: 12px;
+    padding-left: 12px;
+    border-left: 1px solid var(--line-strong);
   }
 
   .nav-links { display: flex; gap: 36px; list-style: none; }
@@ -119,437 +101,283 @@
   }
   .nav-links a:hover { color: var(--fg); }
 
-  .nav-issue {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--fg-mute);
-    letter-spacing: 0.1em;
+  .nav-cta {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
+    padding: 10px 18px;
+    background: var(--fg);
+    color: var(--bg);
+    transition: all 0.25s;
   }
+  .nav-cta:hover { background: var(--accent); color: var(--bg); }
 
   /* ───────── HERO ───────── */
   .hero {
-    padding: 120px 48px 100px;
-    border-bottom: 1px solid var(--line);
     position: relative;
-  }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.55fr 1fr;
-    gap: 80px;
-    align-items: end;
-  }
-  .hero-kicker {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--accent);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 36px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .hero-kicker::before {
-    content: '';
-    width: 28px;
-    height: 1px;
-    background: var(--accent);
-  }
-  .hero h1 {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(56px, 8vw, 130px);
-    line-height: 0.94;
-    letter-spacing: -0.035em;
-    margin-bottom: 0;
-  }
-  .hero h1 .italic { font-style: italic; font-weight: 300; }
-  .hero h1 .accent { color: var(--accent); }
-
-  .hero-right {
-    padding-bottom: 14px;
-    padding-left: 30px;
-    border-left: 1px solid var(--line);
-  }
-  .hero-lede {
-    font-family: var(--serif);
-    font-size: 18px;
-    line-height: 1.55;
-    color: var(--fg);
-    margin-bottom: 32px;
-    letter-spacing: 0.005em;
-  }
-  .hero-lede em {
-    font-style: italic;
-    color: var(--accent);
-  }
-  .hero-meta {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px 20px;
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
-    font-family: var(--mono);
-    font-size: 11.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--fg-mute);
-  }
-  .hero-meta strong {
-    display: block;
-    color: var(--fg);
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 13px;
-    margin-top: 4px;
-    letter-spacing: 0.04em;
-  }
-
-  /* ───────── FEATURED REPORT ───────── */
-  .featured-report {
-    border-bottom: 1px solid var(--line);
-    background: var(--bg-deep);
-  }
-  .fr-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 600px;
-  }
-  .fr-visual {
-    background:
-      radial-gradient(ellipse at 35% 40%, rgba(247, 201, 72, 0.32), transparent 55%),
-      radial-gradient(ellipse at 65% 60%, rgba(232, 83, 63, 0.42), transparent 55%),
-      radial-gradient(ellipse at 50% 90%, rgba(238, 106, 44, 0.22), transparent 60%),
-      var(--bg-deep);
-    position: relative;
-    border-right: 1px solid var(--line);
-    overflow: hidden;
-    min-height: 480px;
-  }
-  .fr-visual::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
-    opacity: 0.08;
-    mix-blend-mode: overlay;
-  }
-  .fr-visual svg {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 52%;
-    opacity: 0.95;
-    z-index: 1;
-  }
-  .fr-tag {
-    position: absolute;
-    top: 32px;
-    left: 32px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--fg);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    z-index: 2;
-  }
-  .fr-tag .accent { color: var(--accent); }
-  .fr-issue-meta {
-    position: absolute;
-    bottom: 32px;
-    left: 32px;
-    font-family: var(--mono);
-    font-size: 10.5px;
-    color: var(--fg-dim);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    z-index: 2;
-  }
-
-  .fr-content {
-    padding: 80px 64px;
+    height: 100vh;
+    min-height: 720px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+    text-align: center;
+    padding: 100px 48px 80px;
+    overflow: hidden;
   }
-  .fr-kicker {
+
+  /* Atmospheric layered background */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 75% 30%, rgba(247, 201, 72, 0.08), transparent 45%),
+      radial-gradient(ellipse at 25% 70%, rgba(232, 83, 63, 0.07), transparent 50%),
+      radial-gradient(ellipse at 50% 100%, rgba(184, 70, 50, 0.06), transparent 55%),
+      linear-gradient(135deg, #221313 0%, #110707 60%, #0a0404 100%);
+    pointer-events: none;
+  }
+
+  /* Light beam SVG overlay */
+  .hero-beams {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.55;
+  }
+  .hero-beams svg { width: 100%; height: 100%; display: block; }
+
+  /* Subtle vignette */
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(10, 4, 4, 0.6) 100%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 5;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .hero-kicker {
     font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-  }
-  .fr-content h2 {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(36px, 4.5vw, 64px);
-    line-height: 1;
-    letter-spacing: -0.025em;
-    margin-bottom: 32px;
-  }
-  .fr-content h2 .italic { font-style: italic; }
-  .fr-content .abstract {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 12px;
     color: var(--fg-dim);
-    margin-bottom: 36px;
-    max-width: 480px;
-  }
-  .fr-byline {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--fg-mute);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    margin-bottom: 32px;
-    display: flex;
-    gap: 28px;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.2s forwards;
   }
-  .fr-byline strong { color: var(--fg); font-weight: 500; }
-  .fr-cta {
+
+  .hero-pre {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 26px);
+    color: var(--fg-dim);
+    font-weight: 300;
+    margin-bottom: 18px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.5s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(48px, 7.5vw, 120px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.7s forwards;
+  }
+
+  .hero-sub {
+    font-size: clamp(15px, 1.4vw, 18px);
+    color: var(--fg-dim);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 1s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--fg-mute);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 1.4s forwards;
+  }
+  .scroll-cue::after {
+    content: '';
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, var(--fg-mute), transparent);
+    animation: scroll-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes scroll-pulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.6; }
+    50% { transform: scaleY(1.3); opacity: 1; }
+  }
+
+  /* ───────── BUTTONS ───────── */
+  .btn-ghost {
     display: inline-flex;
     align-items: center;
     gap: 14px;
+    padding: 16px 30px;
+    border: 1px solid var(--line-strong);
     color: var(--fg);
     font-family: var(--display);
     font-weight: 600;
-    font-size: 12.5px;
-    letter-spacing: 0.16em;
+    font-size: 12px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--fg);
-    align-self: flex-start;
-    transition: gap 0.25s, color 0.25s, border-color 0.25s;
+    transition: all 0.25s;
   }
-  .fr-cta:hover { gap: 22px; color: var(--accent); border-color: var(--accent); }
+  .btn-ghost:hover {
+    border-color: var(--fg);
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .btn-solid {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 30px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: all 0.25s;
+  }
+  .btn-solid:hover {
+    background: var(--fg);
+  }
 
   /* ───────── SECTION COMMON ───────── */
-  section { padding: 130px 48px; position: relative; }
-  .section-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 70px;
-    gap: 24px;
-    flex-wrap: wrap;
+  section { padding: 140px 48px; position: relative; }
+
+  .section-centered {
+    text-align: center;
+    max-width: 920px;
+    margin: 0 auto;
   }
   .section-label {
     font-family: var(--mono);
     font-size: 11.5px;
-    color: var(--accent);
-    letter-spacing: 0.18em;
+    color: var(--label);
+    letter-spacing: 0.32em;
     text-transform: uppercase;
-    margin-bottom: 22px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    margin-bottom: 28px;
   }
-  .section-label::before {
-    content: '';
-    width: 28px;
-    height: 1px;
-    background: var(--accent);
-  }
-  .section-title {
-    font-family: var(--serif);
-    font-weight: 300;
+  .section-title-lg {
+    font-family: var(--display);
+    font-weight: 600;
     font-size: clamp(40px, 5.5vw, 80px);
     letter-spacing: -0.03em;
-    line-height: 1;
+    line-height: 1.02;
+    margin-bottom: 36px;
   }
-  .section-title .italic { font-style: italic; }
-  .section-title .accent { color: var(--accent); }
-
-  /* ───────── ARTICLES INDEX ───────── */
-  .articles { border-bottom: 1px solid var(--line); }
-  .filter-tabs {
-    display: flex;
-    gap: 4px;
-    font-family: var(--mono);
-    font-size: 11px;
-  }
-  .filter-tabs button {
-    background: transparent;
-    border: 1px solid var(--line-strong);
-    color: var(--fg-dim);
-    padding: 8px 14px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-family: inherit;
-  }
-  .filter-tabs button:hover { color: var(--fg); border-color: var(--accent); }
-  .filter-tabs button.active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
-  }
-
-  .article-list {
-    border-top: 1px solid var(--line);
-  }
-  .article-row {
-    display: grid;
-    grid-template-columns: 80px 1fr 220px 140px 80px;
-    gap: 40px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--line);
-    align-items: center;
-    cursor: pointer;
-    transition: padding 0.3s;
-    position: relative;
-  }
-  .article-row:hover {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-  .article-row .row-num {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--fg-mute);
-    letter-spacing: 0.06em;
-  }
-  .article-row .row-title {
+  .section-title-lg .italic {
     font-family: var(--serif);
-    font-weight: 400;
-    font-size: 24px;
-    letter-spacing: -0.015em;
-    line-height: 1.2;
-    color: var(--fg);
-  }
-  .article-row .row-title .italic { font-style: italic; color: var(--fg-dim); }
-  .article-row .row-author {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--fg-dim);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .article-row .row-tag {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 10.5px;
-    color: var(--accent);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-  .article-row .row-date {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--fg-mute);
-    letter-spacing: 0.04em;
-    text-align: right;
-  }
-  .article-row .row-arrow {
-    position: absolute;
-    right: -8px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--accent);
-    opacity: 0;
-    transition: all 0.3s;
-    font-size: 18px;
-  }
-  .article-row:hover .row-arrow { opacity: 1; right: 0; }
-
-  .view-all {
-    margin-top: 48px;
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    color: var(--accent);
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    padding-bottom: 5px;
-    border-bottom: 1px solid var(--accent);
-    transition: gap 0.25s;
-  }
-  .view-all:hover { gap: 22px; }
-
-  /* ───────── METHOD / ABOUT ───────── */
-  .method {
-    border-bottom: 1px solid var(--line);
-  }
-  .method-intro {
-    display: grid;
-    grid-template-columns: 1fr 1.1fr;
-    gap: 100px;
-    align-items: start;
-    margin-bottom: 80px;
-  }
-  .method-lead {
-    font-family: var(--serif);
+    font-style: italic;
     font-weight: 300;
-    font-style: italic;
-    font-size: 36px;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    color: var(--fg);
   }
-  .method-lead .accent { color: var(--accent); font-style: normal; }
-  .method-body p {
-    font-size: 15.5px;
-    line-height: 1.75;
+  .section-body {
+    font-size: 16.5px;
     color: var(--fg-dim);
-    margin-bottom: 22px;
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0 auto 48px;
   }
-  .method-body p strong { color: var(--fg); font-weight: 600; }
-  .method-body .acronym-line {
-    margin-top: 32px;
-    padding-top: 28px;
+  .section-body strong { color: var(--fg); font-weight: 600; }
+
+  /* ───────── IDENTITY ───────── */
+  .identity {
     border-top: 1px solid var(--line);
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 16px;
-    color: var(--fg-mute);
+    background: var(--bg-deep);
+    position: relative;
+    overflow: hidden;
   }
-  .method-body .acronym-line .l {
-    color: var(--accent);
-    font-family: var(--display);
-    font-weight: 700;
-    font-style: normal;
-    font-size: 0.95em;
+  .identity::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 900px;
+    background: radial-gradient(ellipse, rgba(232, 83, 63, 0.04), transparent 65%);
+    pointer-events: none;
+  }
+  .identity .section-centered { position: relative; z-index: 2; }
+  .identity-mark {
+    width: 56px;
+    margin: 0 auto 40px;
   }
 
-  /* Five lenses table */
+  /* ───────── METHOD / LENSES ───────── */
+  .method { border-top: 1px solid var(--line); }
+  .lenses-wrap { max-width: 1200px; margin: 0 auto; }
   .lenses {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    margin-top: 60px;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
   .lens {
-    padding: 36px 28px 36px 0;
+    padding: 36px 28px;
     border-right: 1px solid var(--line);
+    text-align: left;
   }
-  .lens:last-child { border-right: none; padding-right: 0; }
+  .lens:last-child { border-right: none; }
   .lens-num {
     font-family: var(--mono);
     font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 18px;
+    color: var(--fg-mute);
+    letter-spacing: 0.16em;
+    margin-bottom: 22px;
   }
   .lens h3 {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 22px;
-    letter-spacing: -0.015em;
-    margin-bottom: 8px;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    color: var(--fg);
   }
   .lens .en {
     font-family: var(--mono);
     font-size: 10.5px;
     color: var(--fg-mute);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
   .lens p {
     font-size: 13.5px;
@@ -557,53 +385,139 @@
     line-height: 1.6;
   }
 
-  /* ───────── ACTIVITIES (slim) ───────── */
-  .activities {
-    border-bottom: 1px solid var(--line);
+  /* ───────── RESEARCH ───────── */
+  .research {
+    border-top: 1px solid var(--line);
     background: var(--bg-deep);
   }
-  .activity-list { border-top: 1px solid var(--line); }
-  .activity-item {
+  .research-list {
+    max-width: 1100px;
+    margin: 60px auto 0;
+    border-top: 1px solid var(--line-strong);
+  }
+  .article-row {
     display: grid;
-    grid-template-columns: 80px 1fr 2fr 120px;
-    gap: 40px;
-    padding: 30px 0;
+    grid-template-columns: 70px 1fr 160px 120px 40px;
+    gap: 36px;
+    padding: 28px 0;
     border-bottom: 1px solid var(--line);
-    align-items: baseline;
+    align-items: center;
+    cursor: pointer;
+    transition: padding 0.3s;
+    text-align: left;
+    position: relative;
   }
-  .activity-num {
+  .article-row:hover { padding-left: 14px; padding-right: 14px; }
+  .row-num {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11.5px;
     color: var(--fg-mute);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
   }
-  .activity-title {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 26px;
-    letter-spacing: -0.015em;
+  .row-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    color: var(--fg);
   }
-  .activity-title .italic { font-style: italic; color: var(--fg-dim); }
-  .activity-desc {
-    color: var(--fg-dim);
-    font-size: 14.5px;
-    line-height: 1.55;
-  }
-  .activity-cadence {
+  .row-title .italic { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--fg-dim); }
+  .row-author {
     font-family: var(--mono);
     font-size: 11px;
-    color: var(--accent);
+    color: var(--fg-dim);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+  }
+  .row-tag-date {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--fg-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .row-tag-date .tag {
+    color: var(--label);
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 0.16em;
+  }
+  .row-arrow {
+    color: var(--fg);
+    opacity: 0;
+    transition: all 0.3s;
+    font-size: 16px;
     text-align: right;
   }
+  .article-row:hover .row-arrow { opacity: 1; transform: translateX(4px); }
 
-  /* ───────── MEMBERS (minimal) ───────── */
-  .members { border-bottom: 1px solid var(--line); }
+  .research-cta { text-align: center; margin-top: 60px; }
+
+  /* ───────── ACTIVITIES ───────── */
+  .activities { border-top: 1px solid var(--line); }
+  .activities-grid {
+    max-width: 1100px;
+    margin: 60px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .activity-card {
+    background: var(--bg);
+    padding: 40px 32px;
+    text-align: left;
+    transition: background 0.25s;
+    cursor: pointer;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+  }
+  .activity-card:hover { background: var(--bg-deep); }
+  .activity-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--label);
+    letter-spacing: 0.16em;
+    margin-bottom: 26px;
+  }
+  .activity-card h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 23px;
+    letter-spacing: -0.015em;
+    margin-bottom: 12px;
+    color: var(--fg);
+  }
+  .activity-card h3 .italic { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--fg-dim); }
+  .activity-card p {
+    font-size: 13.5px;
+    color: var(--fg-dim);
+    line-height: 1.6;
+    flex: 1;
+  }
+  .activity-cadence {
+    margin-top: 24px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--fg-mute);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  /* ───────── MEMBERS ───────── */
+  .members {
+    border-top: 1px solid var(--line);
+    background: var(--bg-deep);
+  }
   .member-grid {
+    max-width: 1200px;
+    margin: 60px auto 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
     border-top: 1px solid var(--line);
     border-left: 1px solid var(--line);
   }
@@ -612,176 +526,123 @@
     border-bottom: 1px solid var(--line);
     padding: 32px 28px;
     transition: background 0.25s;
+    text-align: left;
     min-height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  .member-card:hover { background: var(--bg-deep); }
+  .member-card:hover { background: var(--bg); }
   .member-role {
     font-family: var(--mono);
     font-size: 10.5px;
-    color: var(--accent);
-    letter-spacing: 0.14em;
+    color: var(--label);
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     margin-bottom: 12px;
   }
   .member-name {
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: 26px;
-    line-height: 1.05;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 1.1;
     letter-spacing: -0.015em;
   }
   .member-name .en {
     display: block;
+    font-family: var(--serif);
     font-style: italic;
+    font-weight: 400;
     font-size: 14px;
     color: var(--fg-mute);
     margin-top: 6px;
-    letter-spacing: 0;
   }
   .member-track {
     font-family: var(--mono);
     font-size: 10.5px;
     color: var(--fg-dim);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-top: 14px;
+    letter-spacing: 0.1em;
+    margin-top: 16px;
   }
 
-  /* ───────── RECRUIT SECTION ───────── */
+  /* ───────── RECRUIT ───────── */
   .recruit {
-    padding: 140px 48px;
-    border-bottom: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+    padding: 160px 48px;
     position: relative;
     overflow: hidden;
   }
   .recruit::before {
     content: '';
     position: absolute;
-    top: 0; right: 0;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(ellipse, rgba(232, 83, 63, 0.18), transparent 60%);
-    filter: blur(80px);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1100px; height: 1100px;
+    background: radial-gradient(ellipse, rgba(232, 83, 63, 0.06), transparent 60%);
+    filter: blur(60px);
     pointer-events: none;
   }
   .recruit-inner {
     position: relative;
     z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: end;
-  }
-  .recruit h2 {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: clamp(48px, 6.5vw, 96px);
-    line-height: 0.94;
-    letter-spacing: -0.035em;
-    margin-bottom: 28px;
-  }
-  .recruit h2 .italic { font-style: italic; color: var(--accent); }
-  .recruit-tagline {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 19px;
-    color: var(--fg-dim);
-    margin-bottom: 36px;
-    max-width: 460px;
-    line-height: 1.45;
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto;
   }
   .recruit-info {
+    margin: 56px 0 48px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px 36px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 36px;
     padding: 32px 0;
-    border-top: 1px solid var(--accent);
+    border-top: 1px solid var(--line-strong);
     border-bottom: 1px solid var(--line);
-    margin-bottom: 36px;
+    text-align: left;
   }
   .recruit-info-item h4 {
     font-family: var(--mono);
     font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.14em;
+    color: var(--label);
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .recruit-info-item .primary {
-    font-family: var(--serif);
-    font-size: 22px;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 17px;
     color: var(--fg);
-    line-height: 1.15;
     margin-bottom: 3px;
+    letter-spacing: -0.005em;
   }
   .recruit-info-item .secondary {
     font-size: 12.5px;
     color: var(--fg-mute);
   }
-  .recruit-cta-row {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  .recruit-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    background: var(--accent);
-    color: var(--bg);
-    padding: 16px 28px;
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    transition: all 0.25s;
-  }
-  .recruit-btn:hover { background: var(--fg); }
   .recruit-deadline {
+    margin-top: 24px;
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 11.5px;
     color: var(--fg-dim);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
   .recruit-deadline strong { color: var(--accent); font-weight: 500; }
 
   /* ───────── FOOTER ───────── */
   footer {
-    padding: 60px 48px 32px;
+    padding: 70px 48px 36px;
     background: var(--bg-deep);
+    border-top: 1px solid var(--line);
   }
-  .footer-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 60px;
-    flex-wrap: wrap;
-    gap: 40px;
-  }
-  .footer-statement {
-    font-family: var(--serif);
-    font-style: italic;
-    font-weight: 300;
-    font-size: clamp(28px, 3.5vw, 48px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    max-width: 720px;
-  }
-  .footer-statement .accent { color: var(--accent); }
   .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 48px;
-    padding-top: 48px;
-    border-top: 1px solid var(--line);
+    margin-bottom: 56px;
   }
-  .footer-brand .logo { font-size: 18px; margin-bottom: 16px; }
+  .footer-brand .logo { font-size: 18px; margin-bottom: 18px; }
   .footer-brand p {
     color: var(--fg-mute);
     font-size: 13.5px;
@@ -791,10 +652,10 @@
   .footer-col h4 {
     font-family: var(--mono);
     font-size: 10.5px;
-    color: var(--accent);
+    color: var(--label);
     text-transform: uppercase;
-    letter-spacing: 0.16em;
-    margin-bottom: 18px;
+    letter-spacing: 0.2em;
+    margin-bottom: 20px;
   }
   .footer-col ul { list-style: none; }
   .footer-col li { margin-bottom: 9px; }
@@ -803,354 +664,345 @@
     font-size: 13.5px;
     transition: color 0.2s;
   }
-  .footer-col a:hover { color: var(--accent); }
+  .footer-col a:hover { color: var(--fg); }
   .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 32px;
-    margin-top: 48px;
+    padding-top: 30px;
     border-top: 1px solid var(--line);
     font-family: var(--mono);
     font-size: 10.5px;
     color: var(--fg-mute);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
   }
 
   /* ───────── RESPONSIVE ───────── */
-  @media (max-width: 1100px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .hero-right { padding-left: 0; border-left: none; padding-top: 32px; border-top: 1px solid var(--line); }
-    .fr-inner { grid-template-columns: 1fr; }
-    .fr-visual { min-height: 360px; border-right: none; border-bottom: 1px solid var(--line); }
-    .fr-content { padding: 60px 40px; }
-    .method-intro { grid-template-columns: 1fr; gap: 36px; }
+  @media (max-width: 1024px) {
+    nav { padding: 20px 32px; }
+    .nav-links { gap: 24px; }
+    section, .recruit { padding-left: 32px; padding-right: 32px; }
     .lenses { grid-template-columns: 1fr 1fr; }
-    .lens { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 28px 24px 28px 0; }
-    .lens:nth-child(2n) { border-right: none; padding-right: 0; }
-    .recruit-inner { grid-template-columns: 1fr; gap: 48px; }
-    .article-row { grid-template-columns: 60px 1fr 140px 100px 40px; gap: 24px; }
-    .article-row .row-tag { display: none; }
+    .lens { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .lens:nth-child(2n) { border-right: none; }
+    .activities-grid { grid-template-columns: 1fr 1fr; }
     .member-grid { grid-template-columns: repeat(2, 1fr); }
+    .article-row { grid-template-columns: 50px 1fr 100px 100px 30px; gap: 20px; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
+    .recruit-info { grid-template-columns: 1fr 1fr; }
   }
-  @media (max-width: 720px) {
-    .nav-links, .nav-issue { display: none; }
-    section, .hero, .recruit, .top-banner, nav, footer { padding-left: 22px; padding-right: 22px; }
-    .top-banner { font-size: 10.5px; gap: 12px; }
-    .hero { padding-top: 80px; padding-bottom: 70px; }
-    .hero-meta { grid-template-columns: 1fr 1fr; }
-    .fr-content { padding: 48px 24px; }
-    .article-row { grid-template-columns: 1fr; gap: 6px; padding: 22px 0; }
-    .article-row .row-num, .article-row .row-author, .article-row .row-date { font-size: 10.5px; }
-    .article-row .row-title { font-size: 19px; }
-    .activity-item { grid-template-columns: 1fr; gap: 8px; padding: 22px 0; }
-    .activity-num { display: none; }
+  @media (max-width: 680px) {
+    .nav-links { display: none; }
+    .logo-tag { display: none; }
+    nav { padding: 16px 20px; }
+    section, .recruit, .hero { padding-left: 22px; padding-right: 22px; }
+    .hero { padding-top: 100px; padding-bottom: 60px; }
     .lenses { grid-template-columns: 1fr; }
-    .lens { border-right: none; padding-right: 0; }
+    .lens { border-right: none; }
     .lens:last-child { border-bottom: none; }
+    .activities-grid { grid-template-columns: 1fr; }
     .member-grid { grid-template-columns: 1fr; }
+    .article-row { grid-template-columns: 1fr; gap: 6px; padding: 22px 0; text-align: left; }
+    .row-tag-date, .row-arrow { text-align: left; }
     .recruit-info { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; gap: 36px; }
     .footer-bottom { flex-direction: column; gap: 10px; align-items: flex-start; }
   }
 
-  /* reveal animations */
-  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.9s ease, transform 0.9s ease; }
   .reveal.in { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- Slim recruit banner -->
-<div class="top-banner">
-  <span class="pulse"></span>
-  <span>2026 Spring Recruiting Now Open</span>
-  <span>·</span>
-  <a href="#recruit">Apply by 05.03 →</a>
-</div>
-
 <!-- NAV -->
-<nav>
+<nav id="nav">
   <a href="#" class="logo">
     <svg viewBox="0 0 24 24" width="13" height="13" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="nm" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#f7c948"/>
-          <stop offset="0.5" stop-color="#ee6a2c"/>
-          <stop offset="1" stop-color="#e8533f"/>
+          <stop offset="0" stop-color="#f7c948"/><stop offset="0.5" stop-color="#ee6a2c"/><stop offset="1" stop-color="#e8533f"/>
         </linearGradient>
       </defs>
       <path d="M12 2 L22 20 L2 20 Z" fill="url(#nm)" stroke="#ede3d8" stroke-width="0.8" stroke-opacity="0.55"/>
     </svg>
     PRISM
+    <span class="logo-tag">경영전략학회</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#articles">Research</a></li>
+    <li><a href="#identity">About</a></li>
     <li><a href="#method">Method</a></li>
+    <li><a href="#research">Research</a></li>
     <li><a href="#activities">Activities</a></li>
     <li><a href="#members">Members</a></li>
   </ul>
-  <div class="nav-issue">Vol. I · Issue 03 · 2026</div>
+  <a href="#recruit" class="nav-cta">Apply</a>
 </nav>
 
-<!-- ───────── HERO ───────── -->
+<!-- HERO -->
 <header class="hero">
-  <div class="hero-grid">
-    <div>
-      <div class="hero-kicker">A Strategy Research Society · Est. Seoul 2025</div>
-      <h1>
-        Five lenses<br>
-        on every <span class="italic">strategic</span><br>
-        <span class="accent italic">decision</span>.
-      </h1>
-    </div>
-    <div class="hero-right">
-      <p class="hero-lede">
-        PRISM은 하나의 경영 의사결정을 <em>다섯 가지 분석축</em>으로 분광하여
-        해석하는 학부생 리서치 학회입니다. 매주의 케이스 스터디와 정기 리포트를 통해
-        한국 산업의 다음 10년을 기록합니다.
-      </p>
-      <div class="hero-meta">
-        <div>Founded<strong>September 2025</strong></div>
-        <div>Cohort<strong>1st Generation</strong></div>
-        <div>Researchers<strong>16 Active</strong></div>
-        <div>Output<strong>12 Articles · 1 Report</strong></div>
-      </div>
-    </div>
+  <div class="hero-bg"></div>
+
+  <!-- Refraction light beams -->
+  <div class="hero-beams">
+    <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="b1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f7c948" stop-opacity="0.18"/>
+          <stop offset="1" stop-color="#f7c948" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="b2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ee6a2c" stop-opacity="0.18"/>
+          <stop offset="1" stop-color="#ee6a2c" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="b3" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#e8533f" stop-opacity="0.16"/>
+          <stop offset="1" stop-color="#e8533f" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="b4" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#b73a2a" stop-opacity="0.14"/>
+          <stop offset="1" stop-color="#b73a2a" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="blur"><feGaussianBlur stdDeviation="40"/></filter>
+      </defs>
+      <!-- Beams emerging from upper-right -->
+      <polygon points="1600,-50 1900,400 1100,1000 800,500" fill="url(#b1)" filter="url(#blur)"/>
+      <polygon points="1700,100 2000,500 1200,1100 900,700" fill="url(#b2)" filter="url(#blur)"/>
+      <polygon points="1500,-100 1800,300 1000,900 700,400" fill="url(#b3)" filter="url(#blur)"/>
+      <polygon points="1400,-150 1700,250 900,800 600,300" fill="url(#b4)" filter="url(#blur)"/>
+    </svg>
   </div>
+
+  <div class="hero-vignette"></div>
+
+  <div class="hero-content">
+    <div class="hero-kicker">— A Strategy Research Society · Seoul · 2025 —</div>
+    <div class="hero-pre">Inspire the next generation of</div>
+    <h1>
+      Korean strategic<br>
+      thinkers.
+    </h1>
+    <p class="hero-sub">
+      PRISM은 한국 산업의 다음 10년을 다섯 개의 분석축으로 분광하는 학부생 경영전략 리서치 학회입니다.
+    </p>
+  </div>
+
+  <div class="scroll-cue">Scroll</div>
 </header>
 
-<!-- ───────── FEATURED REPORT ───────── -->
-<section class="featured-report" style="padding:0;">
-  <div class="fr-inner">
-    <div class="fr-visual">
-      <div class="fr-tag"><span class="accent">●</span> PRISM REPORT · INAUGURAL ISSUE</div>
-      <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <linearGradient id="vp-top" x1="0.3" y1="0.05" x2="0.8" y2="0.55">
-            <stop offset="0" stop-color="#f8d76a"/><stop offset="0.5" stop-color="#f0a13a"/><stop offset="1" stop-color="#e87830"/>
-          </linearGradient>
-          <linearGradient id="vp-bot" x1="0.3" y1="0.5" x2="0.85" y2="1">
-            <stop offset="0" stop-color="#ee6a2c"/><stop offset="0.6" stop-color="#e8533f"/><stop offset="1" stop-color="#b73a2a"/>
-          </linearGradient>
-        </defs>
-        <path d="M160 30 L290 250 L30 250 Z" fill="none" stroke="#ede3d8" stroke-width="1.2" stroke-opacity="0.45"/>
-        <path d="M160 30 L160 145 L290 250 Z" fill="url(#vp-top)"/>
-        <path d="M160 145 L290 250 L165 250 Z" fill="url(#vp-bot)"/>
-        <circle cx="160" cy="145" r="2.5" fill="#ede3d8"/>
-      </svg>
-      <div class="fr-issue-meta">Vol. 01 · No. 01 · April 2026 · 62 pages</div>
-    </div>
-    <div class="fr-content">
-      <div class="fr-kicker">Featured Report</div>
-      <h2>K-뷰티 2.0:<br><span class="italic">조용한</span> 글로벌<br>재편의 다섯 축</h2>
-      <p class="abstract">
-        인디 브랜드의 미국 시장 침투, OEM/ODM 밸류체인 재편, 그리고 중국발 역수입 위협 —
-        Prism이 다섯 개 분석축으로 분광한 K-뷰티 산업의 다음 5년에 대한 통합 분석.
-      </p>
-      <div class="fr-byline">
-        <span>LEAD<strong>김연재 · 박서윤</strong></span>
-        <span>CONTRIBUTORS<strong>+4</strong></span>
+<!-- IDENTITY -->
+<section class="identity" id="identity">
+  <div class="section-centered">
+    <svg class="identity-mark" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="im-top" x1="0.3" y1="0.05" x2="0.8" y2="0.55">
+          <stop offset="0" stop-color="#f8d76a"/><stop offset="0.5" stop-color="#f0a13a"/><stop offset="1" stop-color="#e87830"/>
+        </linearGradient>
+        <linearGradient id="im-bot" x1="0.3" y1="0.5" x2="0.85" y2="1">
+          <stop offset="0" stop-color="#ee6a2c"/><stop offset="0.6" stop-color="#e8533f"/><stop offset="1" stop-color="#b73a2a"/>
+        </linearGradient>
+      </defs>
+      <path d="M160 30 L290 250 L30 250 Z" fill="none" stroke="#ede3d8" stroke-width="1.5" stroke-opacity="0.55"/>
+      <path d="M160 30 L160 145 L290 250 Z" fill="url(#im-top)"/>
+      <path d="M160 145 L290 250 L165 250 Z" fill="url(#im-bot)"/>
+    </svg>
+    <div class="section-label">— What is Prism —</div>
+    <h2 class="section-title-lg">
+      One <span class="italic">strategic question</span>,<br>
+      refracted into <span class="italic">five</span>.
+    </h2>
+    <p class="section-body">
+      대부분의 경영 분석은 단일한 시각에 갇힙니다. PRISM은 한 의사결정을
+      <strong>산업구조 · 재무 · 전략 · 소비자 · 정책</strong>의 다섯 축으로 동시에 분광하여,
+      어느 한 렌즈도 지배하지 않는 통합적 통찰을 만들어냅니다.
+    </p>
+    <a href="#method" class="btn-ghost">About Our Method →</a>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section class="method" id="method">
+  <div class="section-centered">
+    <div class="section-label">— Our Method —</div>
+    <h2 class="section-title-lg">
+      Five <span class="italic">lenses</span>.
+    </h2>
+    <p class="section-body">
+      한 줄기의 빛을 다섯 색으로. 우리가 모든 케이스와 리포트에 적용하는
+      통합 분석 프레임워크.
+    </p>
+  </div>
+
+  <div class="lenses-wrap">
+    <div class="lenses">
+      <div class="lens">
+        <div class="lens-num">— 01</div>
+        <h3>산업구조</h3>
+        <div class="en">Industry Structure</div>
+        <p>밸류체인, 진입장벽, 경쟁 구도. Porter를 시작점으로, 그 너머로.</p>
       </div>
-      <a href="#" class="fr-cta">Read the Report →</a>
+      <div class="lens">
+        <div class="lens-num">— 02</div>
+        <h3>재무</h3>
+        <div class="en">Financial Lens</div>
+        <p>실적, 멀티플, 자본 배분. 숫자가 말하는 전략의 흔적.</p>
+      </div>
+      <div class="lens">
+        <div class="lens-num">— 03</div>
+        <h3>전략 포지셔닝</h3>
+        <div class="en">Strategic Positioning</div>
+        <p>차별화, 비즈니스 모델, 게임의 룰. 왜 이 기업은 다른 길을 택했는가.</p>
+      </div>
+      <div class="lens">
+        <div class="lens-num">— 04</div>
+        <h3>소비자</h3>
+        <div class="en">Consumer Insight</div>
+        <p>수요, 행동, 인식의 변화. 시장은 결국 사람이 만든다.</p>
+      </div>
+      <div class="lens">
+        <div class="lens-num">— 05</div>
+        <h3>정책·규제</h3>
+        <div class="en">Policy & Regulation</div>
+        <p>제도의 변화는 산업의 형태를 바꾼다. 보이지 않는 손.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ───────── ARTICLES INDEX ───────── -->
-<section class="articles" id="articles">
-  <div class="section-head">
-    <div>
-      <div class="section-label">— Research Index</div>
-      <h2 class="section-title">Latest <span class="italic">analyses</span>.</h2>
-    </div>
-    <div class="filter-tabs">
-      <button class="active">ALL</button>
-      <button>INDUSTRY</button>
-      <button>STRATEGY</button>
-      <button>FINANCE</button>
-      <button>CONSUMER</button>
-    </div>
+<!-- RESEARCH -->
+<section class="research" id="research">
+  <div class="section-centered">
+    <div class="section-label">— Research & Publications —</div>
+    <h2 class="section-title-lg">
+      Latest <span class="italic">analyses</span>.
+    </h2>
+    <p class="section-body">
+      매주의 케이스 스터디와 분기별 Prism Report를 통해 한국 산업의 변화를 기록합니다.
+    </p>
   </div>
 
-  <div class="article-list">
+  <div class="research-list">
     <a href="#" class="article-row">
       <div class="row-num">№ 012</div>
       <div class="row-title">전기차 캐즘 이후, 완성차 OEM의 <span class="italic">진짜</span> 수익원은 어디인가</div>
       <div class="row-author">이도현</div>
-      <div class="row-tag">INDUSTRY</div>
-      <div class="row-date">2026.05.10</div>
+      <div class="row-tag-date">
+        <span class="tag">INDUSTRY</span>
+        <span>2026.05.10</span>
+      </div>
       <span class="row-arrow">→</span>
     </a>
     <a href="#" class="article-row">
       <div class="row-num">№ 011</div>
       <div class="row-title">네이버의 AI 검색 베팅: <span class="italic">검색</span>인가, 광고 플랫폼의 자기잠식인가</div>
       <div class="row-author">최은서</div>
-      <div class="row-tag">STRATEGY</div>
-      <div class="row-date">2026.04.28</div>
+      <div class="row-tag-date">
+        <span class="tag">STRATEGY</span>
+        <span>2026.04.28</span>
+      </div>
       <span class="row-arrow">→</span>
     </a>
     <a href="#" class="article-row">
       <div class="row-num">№ 010</div>
       <div class="row-title">방산주 랠리의 해부: <span class="italic">지속가능</span>한 멀티플의 조건</div>
       <div class="row-author">한지수</div>
-      <div class="row-tag">FINANCE</div>
-      <div class="row-date">2026.04.18</div>
+      <div class="row-tag-date">
+        <span class="tag">FINANCE</span>
+        <span>2026.04.18</span>
+      </div>
       <span class="row-arrow">→</span>
     </a>
     <a href="#" class="article-row">
       <div class="row-num">№ 009</div>
       <div class="row-title">편의점 4파전 종결: GS25는 <span class="italic">어떻게</span> 다시 1위가 되었나</div>
       <div class="row-author">박서윤</div>
-      <div class="row-tag">CONSUMER</div>
-      <div class="row-date">2026.03.30</div>
+      <div class="row-tag-date">
+        <span class="tag">CONSUMER</span>
+        <span>2026.03.30</span>
+      </div>
       <span class="row-arrow">→</span>
     </a>
     <a href="#" class="article-row">
       <div class="row-num">№ 008</div>
       <div class="row-title">HBM 호황의 그늘: 삼성·하이닉스의 <span class="italic">엇갈린</span> 캐파 전략</div>
       <div class="row-author">김연재</div>
-      <div class="row-tag">INDUSTRY</div>
-      <div class="row-date">2026.03.15</div>
-      <span class="row-arrow">→</span>
-    </a>
-    <a href="#" class="article-row">
-      <div class="row-num">№ 007</div>
-      <div class="row-title">CJ ENM의 IP 전략은 <span class="italic">왜</span> 디즈니와 다른가</div>
-      <div class="row-author">정민호</div>
-      <div class="row-tag">STRATEGY</div>
-      <div class="row-date">2026.02.28</div>
-      <span class="row-arrow">→</span>
-    </a>
-    <a href="#" class="article-row">
-      <div class="row-num">№ 006</div>
-      <div class="row-title">바이오시밀러 2차 사이클: 셀트리온은 <span class="italic">다시</span> 성장주가 될 수 있을까</div>
-      <div class="row-author">윤지원</div>
-      <div class="row-tag">FINANCE</div>
-      <div class="row-date">2026.02.10</div>
-      <span class="row-arrow">→</span>
-    </a>
-  </div>
-
-  <a href="#" class="view-all">Browse the Full Archive →</a>
-</section>
-
-<!-- ───────── METHOD ───────── -->
-<section class="method" id="method">
-  <div class="section-label">— Our Method</div>
-  <h2 class="section-title" style="margin-bottom: 70px;">
-    한 줄기의 빛을<br>
-    <span class="italic">다섯</span> <span class="accent italic">색</span>으로.
-  </h2>
-
-  <div class="method-intro">
-    <div class="method-lead">
-      We refract a single <span class="accent">strategic</span> question into its <br>
-      constituent spectrum — <br>
-      so that no lens dominates.
-    </div>
-    <div class="method-body">
-      <p>대부분의 경영 분석은 <strong>하나의 시각</strong>에 갇힙니다.
-      재무팀은 멀티플로, 컨설턴트는 프레임워크로, 애널리스트는 산업구조로 — 각자의 색으로만 봅니다.</p>
-      <p>PRISM은 한 의사결정을 <strong>다섯 개의 분석축</strong>으로 동시에 분광합니다.
-      산업구조, 재무, 전략 포지셔닝, 소비자 인사이트, 정책·규제. 각 축을 따로, 그리고 함께 봅니다.</p>
-      <p>이 다섯 축의 교집합에서만 보이는 <strong>구조적 통찰</strong>이 우리가 찾는 것입니다.
-      그것이 단순한 케이스 스터디 모임이 아닌, <strong>새로운 분석 프레임</strong>을 만들어내는 학회의 정의입니다.</p>
-      <div class="acronym-line">
-        <span class="l">P</span>eople for <span class="l">R</span>esearch <span class="l">I</span>nsight, <span class="l">S</span>trategy &amp; <span class="l">M</span>anagement
+      <div class="row-tag-date">
+        <span class="tag">INDUSTRY</span>
+        <span>2026.03.15</span>
       </div>
-    </div>
+      <span class="row-arrow">→</span>
+    </a>
   </div>
 
-  <div class="lenses">
-    <div class="lens">
-      <div class="lens-num">— 01</div>
-      <h3>산업구조</h3>
-      <div class="en">Industry Structure</div>
-      <p>밸류체인, 진입장벽, 경쟁 구도. Porter를 시작점으로, 그 너머로.</p>
-    </div>
-    <div class="lens">
-      <div class="lens-num">— 02</div>
-      <h3>재무</h3>
-      <div class="en">Financial Lens</div>
-      <p>실적, 멀티플, 자본 배분. 숫자가 말하는 전략의 흔적.</p>
-    </div>
-    <div class="lens">
-      <div class="lens-num">— 03</div>
-      <h3>전략 포지셔닝</h3>
-      <div class="en">Strategic Positioning</div>
-      <p>차별화, 비즈니스 모델, 게임의 룰. 왜 이 기업은 다른 길을 택했는가.</p>
-    </div>
-    <div class="lens">
-      <div class="lens-num">— 04</div>
-      <h3>소비자 인사이트</h3>
-      <div class="en">Consumer Insight</div>
-      <p>수요의 변화, 행동의 변화, 인식의 변화. 시장은 결국 사람이 만든다.</p>
-    </div>
-    <div class="lens">
-      <div class="lens-num">— 05</div>
-      <h3>정책·규제</h3>
-      <div class="en">Policy & Regulation</div>
-      <p>제도의 변화는 산업의 형태를 바꾼다. 법과 정책이라는 보이지 않는 손.</p>
-    </div>
+  <div class="research-cta">
+    <a href="#" class="btn-ghost">View All Research →</a>
   </div>
 </section>
 
-<!-- ───────── ACTIVITIES ───────── -->
+<!-- ACTIVITIES -->
 <section class="activities" id="activities">
-  <div class="section-label">— Activities</div>
-  <h2 class="section-title" style="margin-bottom: 70px;">
-    Weekly <span class="italic">rhythm</span>,<br>
-    annual <span class="italic">cadence</span>.
-  </h2>
+  <div class="section-centered">
+    <div class="section-label">— Activities —</div>
+    <h2 class="section-title-lg">
+      Weekly <span class="italic">rhythm</span>,<br>
+      annual <span class="italic">cadence</span>.
+    </h2>
+    <p class="section-body">
+      케이스 스터디와 정기 리포트, 그리고 동문 네트워크. 다섯 가지 활동이 학회를 굴립니다.
+    </p>
+  </div>
 
-  <div class="activity-list">
-    <div class="activity-item">
+  <div class="activities-grid">
+    <div class="activity-card">
       <div class="activity-num">— 01</div>
-      <div class="activity-title">Case <span class="italic">Study</span></div>
-      <div class="activity-desc">매주 토요일, 산업·기업 케이스 발표와 토론. 한 학기 12개 케이스를 다섯 축으로 분광합니다.</div>
+      <h3>Case <span class="italic">Study</span></h3>
+      <p>매주 토요일, 산업·기업 케이스 발표와 토론. 한 학기 12개 케이스를 다섯 축으로 분광합니다.</p>
       <div class="activity-cadence">WEEKLY</div>
     </div>
-    <div class="activity-item">
+    <div class="activity-card">
       <div class="activity-num">— 02</div>
-      <div class="activity-title"><span class="italic">Prism</span> Report</div>
-      <div class="activity-desc">분기마다 발간되는 60p 이상의 정기 리서치 보고서. 한 산업을 통합적으로 해부하여 외부 공개합니다.</div>
+      <h3><span class="italic">Prism</span> Report</h3>
+      <p>분기마다 발간되는 60p 이상의 정기 리서치 보고서. 한 산업을 통합적으로 해부합니다.</p>
       <div class="activity-cadence">QUARTERLY</div>
     </div>
-    <div class="activity-item">
+    <div class="activity-card">
       <div class="activity-num">— 03</div>
-      <div class="activity-title">Industry <span class="italic">Article</span></div>
-      <div class="activity-desc">개별 학회원이 작성하는 단편 산업·전략 아티클. 학회 웹과 미디엄에 정기 발행됩니다.</div>
+      <h3>Industry <span class="italic">Article</span></h3>
+      <p>개별 학회원이 작성하는 단편 산업·전략 아티클. 학회 웹과 미디엄에 발행됩니다.</p>
       <div class="activity-cadence">ONGOING</div>
     </div>
-    <div class="activity-item">
+    <div class="activity-card">
       <div class="activity-num">— 04</div>
-      <div class="activity-title">Annual <span class="italic">Conference</span></div>
-      <div class="activity-desc">매년 개최되는 연례 컨퍼런스. 동문 컨설턴트·애널리스트 키노트와 학회 연구 발표로 구성됩니다.</div>
+      <h3>Annual <span class="italic">Conference</span></h3>
+      <p>매년 개최되는 연례 컨퍼런스. 동문 키노트와 학회 연구 발표로 구성됩니다.</p>
       <div class="activity-cadence">ANNUAL</div>
     </div>
-    <div class="activity-item">
+    <div class="activity-card">
       <div class="activity-num">— 05</div>
-      <div class="activity-title">Industry <span class="italic">Network</span></div>
-      <div class="activity-desc">컨설팅·IB·PE 현업과의 1:1 멘토링과 네트워킹 세션. 매 학기 진행됩니다.</div>
+      <h3>Industry <span class="italic">Network</span></h3>
+      <p>컨설팅·IB·PE 현업과의 1:1 멘토링과 네트워킹 세션. 매 학기 진행됩니다.</p>
       <div class="activity-cadence">SEMESTERLY</div>
+    </div>
+    <div class="activity-card" style="background: var(--bg-deep);">
+      <div class="activity-num" style="color: var(--fg-mute);">→</div>
+      <h3 style="color: var(--fg-dim); font-style: italic; font-family: var(--serif); font-weight: 300;">More to come.</h3>
+      <p>학회가 자라면서 활동도 늘어갑니다. 학회원이 직접 새로운 트랙을 제안할 수 있습니다.</p>
+      <div class="activity-cadence">EVOLVING</div>
     </div>
   </div>
 </section>
 
-<!-- ───────── MEMBERS ───────── -->
+<!-- MEMBERS -->
 <section class="members" id="members">
-  <div class="section-head">
-    <div>
-      <div class="section-label">— Members</div>
-      <h2 class="section-title">The <span class="italic">founding</span> cohort.</h2>
-    </div>
-    <div style="font-family: var(--mono); font-size: 11.5px; color: var(--fg-mute); letter-spacing: 0.1em; text-transform: uppercase; text-align: right;">
-      Active 2025.09 — 2026.02<br>
-      <span style="color: var(--fg);">16 Researchers · Seoul</span>
-    </div>
+  <div class="section-centered">
+    <div class="section-label">— Members —</div>
+    <h2 class="section-title-lg">
+      The <span class="italic">founding</span> cohort.
+    </h2>
+    <p class="section-body">
+      2025년 9월, PRISM의 1기 16명이 첫 케이스 세션을 열었습니다.
+    </p>
   </div>
 
   <div class="member-grid">
@@ -1212,64 +1064,54 @@
     </div>
   </div>
 
-  <a href="#" class="view-all" style="margin-top: 48px;">View Full Roster →</a>
+  <div style="text-align: center; margin-top: 56px;">
+    <a href="#" class="btn-ghost">View Full Roster →</a>
+  </div>
 </section>
 
-<!-- ───────── RECRUIT ───────── -->
+<!-- RECRUIT -->
 <section class="recruit" id="recruit">
   <div class="recruit-inner">
-    <div>
-      <div class="section-label">— Join the 2nd Cohort</div>
-      <h2>
-        Refract your<br>
-        <span class="italic">strategic</span><br>
-        thinking.
-      </h2>
-      <p class="recruit-tagline">
-        학년·전공 무관. 산업과 전략에 대한 집요한 호기심을 가진 학생을 찾습니다.
-      </p>
+    <div class="section-label">— Recruiting 2026 —</div>
+    <h2 class="section-title-lg">
+      Be the <span class="italic">2nd</span> cohort.
+    </h2>
+    <p class="section-body">
+      학년·전공 무관. 산업과 전략에 대한 집요한 호기심을 가진 학생을 찾습니다.
+    </p>
+
+    <div class="recruit-info">
+      <div class="recruit-info-item">
+        <h4>대상</h4>
+        <div class="primary">재학생 · 졸업생</div>
+        <div class="secondary">전공 무관</div>
+      </div>
+      <div class="recruit-info-item">
+        <h4>활동</h4>
+        <div class="primary">Case · Research · Report</div>
+        <div class="secondary">주 1회 정기 세션</div>
+      </div>
+      <div class="recruit-info-item">
+        <h4>접수</h4>
+        <div class="primary">04.15 → 05.03</div>
+        <div class="secondary">이메일 지원</div>
+      </div>
+      <div class="recruit-info-item">
+        <h4>면접</h4>
+        <div class="primary">05.07 — 05.08</div>
+        <div class="secondary">대면 / 비대면 선택</div>
+      </div>
     </div>
-    <div>
-      <div class="recruit-info">
-        <div class="recruit-info-item">
-          <h4>대상</h4>
-          <div class="primary">재학생 · 졸업생</div>
-          <div class="secondary">전공 무관</div>
-        </div>
-        <div class="recruit-info-item">
-          <h4>활동</h4>
-          <div class="primary">Case · Research · Report</div>
-          <div class="secondary">주 1회 정기 세션</div>
-        </div>
-        <div class="recruit-info-item">
-          <h4>접수</h4>
-          <div class="primary">04.15 → 05.03</div>
-          <div class="secondary">이메일 지원</div>
-        </div>
-        <div class="recruit-info-item">
-          <h4>면접</h4>
-          <div class="primary">05.07 — 05.08</div>
-          <div class="secondary">대면 / 비대면 선택</div>
-        </div>
-      </div>
-      <div class="recruit-cta-row">
-        <a href="mailto:prismsoc.join@gmail.com" class="recruit-btn">Apply via Email →</a>
-        <div class="recruit-deadline">
-          Deadline <strong>05.03 SUN 23:59 KST</strong>
-        </div>
-      </div>
+
+    <a href="mailto:prismsoc.join@gmail.com" class="btn-solid">Apply via Email →</a>
+    <div class="recruit-deadline">
+      Deadline <strong>05.03 SUN 23:59 KST</strong>
     </div>
   </div>
 </section>
 
-<!-- ───────── FOOTER ───────── -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-statement">
-      Refracting Korean business <br>
-      strategy <span class="accent">since 2025</span>.
-    </div>
-  </div>
   <div class="footer-grid">
     <div class="footer-brand">
       <a href="#" class="logo">
@@ -1286,21 +1128,21 @@
       <p>다섯 가지 분석축으로 산업과 기업을 분광 해석하는 학부생 경영전략 리서치 학회. Seoul, Republic of Korea.</p>
     </div>
     <div class="footer-col">
+      <h4>Society</h4>
+      <ul>
+        <li><a href="#identity">About</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#members">Members</a></li>
+        <li><a href="#recruit">Recruit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
       <h4>Research</h4>
       <ul>
         <li><a href="#">Articles</a></li>
         <li><a href="#">Prism Report</a></li>
         <li><a href="#">Archive</a></li>
         <li><a href="#">Newsletter</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Society</h4>
-      <ul>
-        <li><a href="#method">Method</a></li>
-        <li><a href="#activities">Activities</a></li>
-        <li><a href="#members">Members</a></li>
-        <li><a href="#recruit">Recruit</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1315,19 +1157,20 @@
   </div>
   <div class="footer-bottom">
     <span>© 2026 PRISM Society — All rights reserved</span>
-    <span>Vol. I · Issue 03</span>
+    <span>Refracting Korean strategy since 2025</span>
   </div>
 </footer>
 
 <script>
-  document.querySelectorAll('.filter-tabs button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-tabs button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
+  // Nav background on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
   });
 
-  const reveals = document.querySelectorAll('.section-title, .hero h1, .method-lead, .lens, .activity-item, .member-card, .article-row, .recruit h2');
+  // Reveal animations
+  const reveals = document.querySelectorAll('.section-title-lg, .section-body, .lens, .activity-card, .member-card, .article-row');
   reveals.forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
