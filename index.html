@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRISM — 경영전략학회</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a0e0e;
+    --bg-elev: #221313;
+    --bg-deep: #110707;
+    --fg: #ede3d8;
+    --fg-dim: #a89a8e;
+    --fg-mute: #6e5e54;
+    --line: #2b1c1c;
+    --line-strong: #3a2626;
+    --accent: #e8533f;
+    --accent-soft: rgba(232, 83, 63, 0.12);
+
+    --display: 'Archivo', 'Pretendard Variable', sans-serif;
+    --serif: 'Fraunces', 'Pretendard Variable', serif;
+    --sans: 'Pretendard Variable', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    line-height: 1.55;
+  }
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    z-index: 1000;
+    mix-blend-mode: overlay;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ───────── RECRUIT BANNER ───────── */
+  .top-banner {
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 9px 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+  .top-banner .pulse {
+    width: 6px; height: 6px;
+    background: var(--bg);
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+  }
+  .top-banner a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ───────── NAV ───────── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(26, 14, 14, 0.82);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .logo {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 17px;
+    letter-spacing: 0.22em;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--fg-dim);
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--fg); }
+
+  .nav-issue {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--fg-mute);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ───────── HERO ───────── */
+  .hero {
+    padding: 120px 48px 100px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .hero-kicker {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-kicker::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(56px, 8vw, 130px);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    margin-bottom: 0;
+  }
+  .hero h1 .italic { font-style: italic; font-weight: 300; }
+  .hero h1 .accent { color: var(--accent); }
+
+  .hero-right {
+    padding-bottom: 14px;
+    padding-left: 30px;
+    border-left: 1px solid var(--line);
+  }
+  .hero-lede {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--fg);
+    margin-bottom: 32px;
+    letter-spacing: 0.005em;
+  }
+  .hero-lede em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 20px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--fg-mute);
+  }
+  .hero-meta strong {
+    display: block;
+    color: var(--fg);
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ───────── FEATURED REPORT ───────── */
+  .featured-report {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-deep);
+  }
+  .fr-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+  }
+  .fr-visual {
+    background:
+      radial-gradient(ellipse at 35% 40%, rgba(247, 201, 72, 0.32), transparent 55%),
+      radial-gradient(ellipse at 65% 60%, rgba(232, 83, 63, 0.42), transparent 55%),
+      radial-gradient(ellipse at 50% 90%, rgba(238, 106, 44, 0.22), transparent 60%),
+      var(--bg-deep);
+    position: relative;
+    border-right: 1px solid var(--line);
+    overflow: hidden;
+    min-height: 480px;
+  }
+  .fr-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+  }
+  .fr-visual svg {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52%;
+    opacity: 0.95;
+    z-index: 1;
+  }
+  .fr-tag {
+    position: absolute;
+    top: 32px;
+    left: 32px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--fg);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .fr-tag .accent { color: var(--accent); }
+  .fr-issue-meta {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--fg-dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  .fr-content {
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .fr-kicker {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .fr-content h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(36px, 4.5vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin-bottom: 32px;
+  }
+  .fr-content h2 .italic { font-style: italic; }
+  .fr-content .abstract {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--fg-dim);
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+  .fr-byline {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--fg-mute);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    display: flex;
+    gap: 28px;
+  }
+  .fr-byline strong { color: var(--fg); font-weight: 500; }
+  .fr-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--fg);
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--fg);
+    align-self: flex-start;
+    transition: gap 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .fr-cta:hover { gap: 22px; color: var(--accent); border-color: var(--accent); }
+
+  /* ───────── SECTION COMMON ───────── */
+  section { padding: 130px 48px; position: relative; }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 70px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(40px, 5.5vw, 80px);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .section-title .italic { font-style: italic; }
+  .section-title .accent { color: var(--accent); }
+
+  /* ───────── ARTICLES INDEX ───────── */
+  .articles { border-bottom: 1px solid var(--line); }
+  .filter-tabs {
+    display: flex;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+  .filter-tabs button {
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    color: var(--fg-dim);
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: inherit;
+  }
+  .filter-tabs button:hover { color: var(--fg); border-color: var(--accent); }
+  .filter-tabs button.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  .article-list {
+    border-top: 1px solid var(--line);
+  }
+  .article-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 220px 140px 80px;
+    gap: 40px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+    cursor: pointer;
+    transition: padding 0.3s;
+    position: relative;
+  }
+  .article-row:hover {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .article-row .row-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--fg-mute);
+    letter-spacing: 0.06em;
+  }
+  .article-row .row-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    color: var(--fg);
+  }
+  .article-row .row-title .italic { font-style: italic; color: var(--fg-dim); }
+  .article-row .row-author {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--fg-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .article-row .row-tag {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .article-row .row-date {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--fg-mute);
+    letter-spacing: 0.04em;
+    text-align: right;
+  }
+  .article-row .row-arrow {
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--accent);
+    opacity: 0;
+    transition: all 0.3s;
+    font-size: 18px;
+  }
+  .article-row:hover .row-arrow { opacity: 1; right: 0; }
+
+  .view-all {
+    margin-top: 48px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--accent);
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--accent);
+    transition: gap 0.25s;
+  }
+  .view-all:hover { gap: 22px; }
+
+  /* ───────── METHOD / ABOUT ───────── */
+  .method {
+    border-bottom: 1px solid var(--line);
+  }
+  .method-intro {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 100px;
+    align-items: start;
+    margin-bottom: 80px;
+  }
+  .method-lead {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--fg);
+  }
+  .method-lead .accent { color: var(--accent); font-style: normal; }
+  .method-body p {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--fg-dim);
+    margin-bottom: 22px;
+  }
+  .method-body p strong { color: var(--fg); font-weight: 600; }
+  .method-body .acronym-line {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--fg-mute);
+  }
+  .method-body .acronym-line .l {
+    color: var(--accent);
+    font-family: var(--display);
+    font-weight: 700;
+    font-style: normal;
+    font-size: 0.95em;
+  }
+
+  /* Five lenses table */
+  .lenses {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .lens {
+    padding: 36px 28px 36px 0;
+    border-right: 1px solid var(--line);
+  }
+  .lens:last-child { border-right: none; padding-right: 0; }
+  .lens-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+  }
+  .lens h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+  }
+  .lens .en {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--fg-mute);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .lens p {
+    font-size: 13.5px;
+    color: var(--fg-dim);
+    line-height: 1.6;
+  }
+
+  /* ───────── ACTIVITIES (slim) ───────── */
+  .activities {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-deep);
+  }
+  .activity-list { border-top: 1px solid var(--line); }
+  .activity-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 2fr 120px;
+    gap: 40px;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .activity-num {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--fg-mute);
+    letter-spacing: 0.04em;
+  }
+  .activity-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: -0.015em;
+  }
+  .activity-title .italic { font-style: italic; color: var(--fg-dim); }
+  .activity-desc {
+    color: var(--fg-dim);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+  .activity-cadence {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-align: right;
+  }
+
+  /* ───────── MEMBERS (minimal) ───────── */
+  .members { border-bottom: 1px solid var(--line); }
+  .member-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .member-card {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 32px 28px;
+    transition: background 0.25s;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .member-card:hover { background: var(--bg-deep); }
+  .member-role {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .member-name {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+  .member-name .en {
+    display: block;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--fg-mute);
+    margin-top: 6px;
+    letter-spacing: 0;
+  }
+  .member-track {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--fg-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 14px;
+  }
+
+  /* ───────── RECRUIT SECTION ───────── */
+  .recruit {
+    padding: 140px 48px;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .recruit::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(232, 83, 63, 0.18), transparent 60%);
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .recruit-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .recruit h2 {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(48px, 6.5vw, 96px);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    margin-bottom: 28px;
+  }
+  .recruit h2 .italic { font-style: italic; color: var(--accent); }
+  .recruit-tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--fg-dim);
+    margin-bottom: 36px;
+    max-width: 460px;
+    line-height: 1.45;
+  }
+  .recruit-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 36px;
+    padding: 32px 0;
+    border-top: 1px solid var(--accent);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+  .recruit-info-item h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .recruit-info-item .primary {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: var(--fg);
+    line-height: 1.15;
+    margin-bottom: 3px;
+  }
+  .recruit-info-item .secondary {
+    font-size: 12.5px;
+    color: var(--fg-mute);
+  }
+  .recruit-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .recruit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 16px 28px;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transition: all 0.25s;
+  }
+  .recruit-btn:hover { background: var(--fg); }
+  .recruit-deadline {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--fg-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .recruit-deadline strong { color: var(--accent); font-weight: 500; }
+
+  /* ───────── FOOTER ───────── */
+  footer {
+    padding: 60px 48px 32px;
+    background: var(--bg-deep);
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  .footer-statement {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 720px;
+  }
+  .footer-statement .accent { color: var(--accent); }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-top: 48px;
+    border-top: 1px solid var(--line);
+  }
+  .footer-brand .logo { font-size: 18px; margin-bottom: 16px; }
+  .footer-brand p {
+    color: var(--fg-mute);
+    font-size: 13.5px;
+    line-height: 1.6;
+    max-width: 320px;
+  }
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: 18px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 9px; }
+  .footer-col a {
+    color: var(--fg-dim);
+    font-size: 13.5px;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 32px;
+    margin-top: 48px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--fg-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ───────── RESPONSIVE ───────── */
+  @media (max-width: 1100px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-right { padding-left: 0; border-left: none; padding-top: 32px; border-top: 1px solid var(--line); }
+    .fr-inner { grid-template-columns: 1fr; }
+    .fr-visual { min-height: 360px; border-right: none; border-bottom: 1px solid var(--line); }
+    .fr-content { padding: 60px 40px; }
+    .method-intro { grid-template-columns: 1fr; gap: 36px; }
+    .lenses { grid-template-columns: 1fr 1fr; }
+    .lens { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 28px 24px 28px 0; }
+    .lens:nth-child(2n) { border-right: none; padding-right: 0; }
+    .recruit-inner { grid-template-columns: 1fr; gap: 48px; }
+    .article-row { grid-template-columns: 60px 1fr 140px 100px 40px; gap: 24px; }
+    .article-row .row-tag { display: none; }
+    .member-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 720px) {
+    .nav-links, .nav-issue { display: none; }
+    section, .hero, .recruit, .top-banner, nav, footer { padding-left: 22px; padding-right: 22px; }
+    .top-banner { font-size: 10.5px; gap: 12px; }
+    .hero { padding-top: 80px; padding-bottom: 70px; }
+    .hero-meta { grid-template-columns: 1fr 1fr; }
+    .fr-content { padding: 48px 24px; }
+    .article-row { grid-template-columns: 1fr; gap: 6px; padding: 22px 0; }
+    .article-row .row-num, .article-row .row-author, .article-row .row-date { font-size: 10.5px; }
+    .article-row .row-title { font-size: 19px; }
+    .activity-item { grid-template-columns: 1fr; gap: 8px; padding: 22px 0; }
+    .activity-num { display: none; }
+    .lenses { grid-template-columns: 1fr; }
+    .lens { border-right: none; padding-right: 0; }
+    .lens:last-child { border-bottom: none; }
+    .member-grid { grid-template-columns: 1fr; }
+    .recruit-info { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .footer-bottom { flex-direction: column; gap: 10px; align-items: flex-start; }
+  }
+
+  /* reveal animations */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- Slim recruit banner -->
+<div class="top-banner">
+  <span class="pulse"></span>
+  <span>2026 Spring Recruiting Now Open</span>
+  <span>·</span>
+  <a href="#recruit">Apply by 05.03 →</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">
+    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="nm" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f7c948"/>
+          <stop offset="0.5" stop-color="#ee6a2c"/>
+          <stop offset="1" stop-color="#e8533f"/>
+        </linearGradient>
+      </defs>
+      <path d="M12 2 L22 20 L2 20 Z" fill="url(#nm)" stroke="#ede3d8" stroke-width="0.8" stroke-opacity="0.55"/>
+    </svg>
+    PRISM
+  </a>
+  <ul class="nav-links">
+    <li><a href="#articles">Research</a></li>
+    <li><a href="#method">Method</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#members">Members</a></li>
+  </ul>
+  <div class="nav-issue">Vol. I · Issue 03 · 2026</div>
+</nav>
+
+<!-- ───────── HERO ───────── -->
+<header class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-kicker">A Strategy Research Society · Est. Seoul 2025</div>
+      <h1>
+        Five lenses<br>
+        on every <span class="italic">strategic</span><br>
+        <span class="accent italic">decision</span>.
+      </h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-lede">
+        PRISM은 하나의 경영 의사결정을 <em>다섯 가지 분석축</em>으로 분광하여
+        해석하는 학부생 리서치 학회입니다. 매주의 케이스 스터디와 정기 리포트를 통해
+        한국 산업의 다음 10년을 기록합니다.
+      </p>
+      <div class="hero-meta">
+        <div>Founded<strong>September 2025</strong></div>
+        <div>Cohort<strong>1st Generation</strong></div>
+        <div>Researchers<strong>16 Active</strong></div>
+        <div>Output<strong>12 Articles · 1 Report</strong></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ───────── FEATURED REPORT ───────── -->
+<section class="featured-report" style="padding:0;">
+  <div class="fr-inner">
+    <div class="fr-visual">
+      <div class="fr-tag"><span class="accent">●</span> PRISM REPORT · INAUGURAL ISSUE</div>
+      <svg viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="vp-top" x1="0.3" y1="0.05" x2="0.8" y2="0.55">
+            <stop offset="0" stop-color="#f8d76a"/><stop offset="0.5" stop-color="#f0a13a"/><stop offset="1" stop-color="#e87830"/>
+          </linearGradient>
+          <linearGradient id="vp-bot" x1="0.3" y1="0.5" x2="0.85" y2="1">
+            <stop offset="0" stop-color="#ee6a2c"/><stop offset="0.6" stop-color="#e8533f"/><stop offset="1" stop-color="#b73a2a"/>
+          </linearGradient>
+        </defs>
+        <path d="M160 30 L290 250 L30 250 Z" fill="none" stroke="#ede3d8" stroke-width="1.2" stroke-opacity="0.45"/>
+        <path d="M160 30 L160 145 L290 250 Z" fill="url(#vp-top)"/>
+        <path d="M160 145 L290 250 L165 250 Z" fill="url(#vp-bot)"/>
+        <circle cx="160" cy="145" r="2.5" fill="#ede3d8"/>
+      </svg>
+      <div class="fr-issue-meta">Vol. 01 · No. 01 · April 2026 · 62 pages</div>
+    </div>
+    <div class="fr-content">
+      <div class="fr-kicker">Featured Report</div>
+      <h2>K-뷰티 2.0:<br><span class="italic">조용한</span> 글로벌<br>재편의 다섯 축</h2>
+      <p class="abstract">
+        인디 브랜드의 미국 시장 침투, OEM/ODM 밸류체인 재편, 그리고 중국발 역수입 위협 —
+        Prism이 다섯 개 분석축으로 분광한 K-뷰티 산업의 다음 5년에 대한 통합 분석.
+      </p>
+      <div class="fr-byline">
+        <span>LEAD<strong>김연재 · 박서윤</strong></span>
+        <span>CONTRIBUTORS<strong>+4</strong></span>
+      </div>
+      <a href="#" class="fr-cta">Read the Report →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── ARTICLES INDEX ───────── -->
+<section class="articles" id="articles">
+  <div class="section-head">
+    <div>
+      <div class="section-label">— Research Index</div>
+      <h2 class="section-title">Latest <span class="italic">analyses</span>.</h2>
+    </div>
+    <div class="filter-tabs">
+      <button class="active">ALL</button>
+      <button>INDUSTRY</button>
+      <button>STRATEGY</button>
+      <button>FINANCE</button>
+      <button>CONSUMER</button>
+    </div>
+  </div>
+
+  <div class="article-list">
+    <a href="#" class="article-row">
+      <div class="row-num">№ 012</div>
+      <div class="row-title">전기차 캐즘 이후, 완성차 OEM의 <span class="italic">진짜</span> 수익원은 어디인가</div>
+      <div class="row-author">이도현</div>
+      <div class="row-tag">INDUSTRY</div>
+      <div class="row-date">2026.05.10</div>
+      <span class="row-arrow">→</span>
+    </a>
+    <a href="#" class="article-row">
+      <div class="row-num">№ 011</div>
+      <div class="row-title">네이버의 AI 검색 베팅: <span class="italic">검색</span>인가, 광고 플랫폼의 자기잠식인가</div>
+      <div class="row-author">최은서</div>
+      <div class="row-tag">STRATEGY</div>
+      <div class="row-date">2026.04.28</div>
+      <span class="row-arrow">→</span>
+    </a>
+    <a href="#" class="article-row">
+      <div class="row-num">№ 010</div>
+      <div class="row-title">방산주 랠리의 해부: <span class="italic">지속가능</span>한 멀티플의 조건</div>
+      <div class="row-author">한지수</div>
+      <div class="row-tag">FINANCE</div>
+      <div class="row-date">2026.04.18</div>
+      <span class="row-arrow">→</span>
+    </a>
+    <a href="#" class="article-row">
+      <div class="row-num">№ 009</div>
+      <div class="row-title">편의점 4파전 종결: GS25는 <span class="italic">어떻게</span> 다시 1위가 되었나</div>
+      <div class="row-author">박서윤</div>
+      <div class="row-tag">CONSUMER</div>
+      <div class="row-date">2026.03.30</div>
+      <span class="row-arrow">→</span>
+    </a>
+    <a href="#" class="article-row">
+      <div class="row-num">№ 008</div>
+      <div class="row-title">HBM 호황의 그늘: 삼성·하이닉스의 <span class="italic">엇갈린</span> 캐파 전략</div>
+      <div class="row-author">김연재</div>
+      <div class="row-tag">INDUSTRY</div>
+      <div class="row-date">2026.03.15</div>
+      <span class="row-arrow">→</span>
+    </a>
+    <a href="#" class="article-row">
+      <div class="row-num">№ 007</div>
+      <div class="row-title">CJ ENM의 IP 전략은 <span class="italic">왜</span> 디즈니와 다른가</div>
+      <div class="row-author">정민호</div>
+      <div class="row-tag">STRATEGY</div>
+      <div class="row-date">2026.02.28</div>
+      <span class="row-arrow">→</span>
+    </a>
+    <a href="#" class="article-row">
+      <div class="row-num">№ 006</div>
+      <div class="row-title">바이오시밀러 2차 사이클: 셀트리온은 <span class="italic">다시</span> 성장주가 될 수 있을까</div>
+      <div class="row-author">윤지원</div>
+      <div class="row-tag">FINANCE</div>
+      <div class="row-date">2026.02.10</div>
+      <span class="row-arrow">→</span>
+    </a>
+  </div>
+
+  <a href="#" class="view-all">Browse the Full Archive →</a>
+</section>
+
+<!-- ───────── METHOD ───────── -->
+<section class="method" id="method">
+  <div class="section-label">— Our Method</div>
+  <h2 class="section-title" style="margin-bottom: 70px;">
+    한 줄기의 빛을<br>
+    <span class="italic">다섯</span> <span class="accent italic">색</span>으로.
+  </h2>
+
+  <div class="method-intro">
+    <div class="method-lead">
+      We refract a single <span class="accent">strategic</span> question into its <br>
+      constituent spectrum — <br>
+      so that no lens dominates.
+    </div>
+    <div class="method-body">
+      <p>대부분의 경영 분석은 <strong>하나의 시각</strong>에 갇힙니다.
+      재무팀은 멀티플로, 컨설턴트는 프레임워크로, 애널리스트는 산업구조로 — 각자의 색으로만 봅니다.</p>
+      <p>PRISM은 한 의사결정을 <strong>다섯 개의 분석축</strong>으로 동시에 분광합니다.
+      산업구조, 재무, 전략 포지셔닝, 소비자 인사이트, 정책·규제. 각 축을 따로, 그리고 함께 봅니다.</p>
+      <p>이 다섯 축의 교집합에서만 보이는 <strong>구조적 통찰</strong>이 우리가 찾는 것입니다.
+      그것이 단순한 케이스 스터디 모임이 아닌, <strong>새로운 분석 프레임</strong>을 만들어내는 학회의 정의입니다.</p>
+      <div class="acronym-line">
+        <span class="l">P</span>eople for <span class="l">R</span>esearch <span class="l">I</span>nsight, <span class="l">S</span>trategy &amp; <span class="l">M</span>anagement
+      </div>
+    </div>
+  </div>
+
+  <div class="lenses">
+    <div class="lens">
+      <div class="lens-num">— 01</div>
+      <h3>산업구조</h3>
+      <div class="en">Industry Structure</div>
+      <p>밸류체인, 진입장벽, 경쟁 구도. Porter를 시작점으로, 그 너머로.</p>
+    </div>
+    <div class="lens">
+      <div class="lens-num">— 02</div>
+      <h3>재무</h3>
+      <div class="en">Financial Lens</div>
+      <p>실적, 멀티플, 자본 배분. 숫자가 말하는 전략의 흔적.</p>
+    </div>
+    <div class="lens">
+      <div class="lens-num">— 03</div>
+      <h3>전략 포지셔닝</h3>
+      <div class="en">Strategic Positioning</div>
+      <p>차별화, 비즈니스 모델, 게임의 룰. 왜 이 기업은 다른 길을 택했는가.</p>
+    </div>
+    <div class="lens">
+      <div class="lens-num">— 04</div>
+      <h3>소비자 인사이트</h3>
+      <div class="en">Consumer Insight</div>
+      <p>수요의 변화, 행동의 변화, 인식의 변화. 시장은 결국 사람이 만든다.</p>
+    </div>
+    <div class="lens">
+      <div class="lens-num">— 05</div>
+      <h3>정책·규제</h3>
+      <div class="en">Policy & Regulation</div>
+      <p>제도의 변화는 산업의 형태를 바꾼다. 법과 정책이라는 보이지 않는 손.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── ACTIVITIES ───────── -->
+<section class="activities" id="activities">
+  <div class="section-label">— Activities</div>
+  <h2 class="section-title" style="margin-bottom: 70px;">
+    Weekly <span class="italic">rhythm</span>,<br>
+    annual <span class="italic">cadence</span>.
+  </h2>
+
+  <div class="activity-list">
+    <div class="activity-item">
+      <div class="activity-num">— 01</div>
+      <div class="activity-title">Case <span class="italic">Study</span></div>
+      <div class="activity-desc">매주 토요일, 산업·기업 케이스 발표와 토론. 한 학기 12개 케이스를 다섯 축으로 분광합니다.</div>
+      <div class="activity-cadence">WEEKLY</div>
+    </div>
+    <div class="activity-item">
+      <div class="activity-num">— 02</div>
+      <div class="activity-title"><span class="italic">Prism</span> Report</div>
+      <div class="activity-desc">분기마다 발간되는 60p 이상의 정기 리서치 보고서. 한 산업을 통합적으로 해부하여 외부 공개합니다.</div>
+      <div class="activity-cadence">QUARTERLY</div>
+    </div>
+    <div class="activity-item">
+      <div class="activity-num">— 03</div>
+      <div class="activity-title">Industry <span class="italic">Article</span></div>
+      <div class="activity-desc">개별 학회원이 작성하는 단편 산업·전략 아티클. 학회 웹과 미디엄에 정기 발행됩니다.</div>
+      <div class="activity-cadence">ONGOING</div>
+    </div>
+    <div class="activity-item">
+      <div class="activity-num">— 04</div>
+      <div class="activity-title">Annual <span class="italic">Conference</span></div>
+      <div class="activity-desc">매년 개최되는 연례 컨퍼런스. 동문 컨설턴트·애널리스트 키노트와 학회 연구 발표로 구성됩니다.</div>
+      <div class="activity-cadence">ANNUAL</div>
+    </div>
+    <div class="activity-item">
+      <div class="activity-num">— 05</div>
+      <div class="activity-title">Industry <span class="italic">Network</span></div>
+      <div class="activity-desc">컨설팅·IB·PE 현업과의 1:1 멘토링과 네트워킹 세션. 매 학기 진행됩니다.</div>
+      <div class="activity-cadence">SEMESTERLY</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── MEMBERS ───────── -->
+<section class="members" id="members">
+  <div class="section-head">
+    <div>
+      <div class="section-label">— Members</div>
+      <h2 class="section-title">The <span class="italic">founding</span> cohort.</h2>
+    </div>
+    <div style="font-family: var(--mono); font-size: 11.5px; color: var(--fg-mute); letter-spacing: 0.1em; text-transform: uppercase; text-align: right;">
+      Active 2025.09 — 2026.02<br>
+      <span style="color: var(--fg);">16 Researchers · Seoul</span>
+    </div>
+  </div>
+
+  <div class="member-grid">
+    <div class="member-card">
+      <div>
+        <div class="member-role">Founder · President</div>
+        <div class="member-name">김연재<span class="en">Yeonjae Kim</span></div>
+      </div>
+      <div class="member-track">STRATEGY · INDUSTRY</div>
+    </div>
+    <div class="member-card">
+      <div>
+        <div class="member-role">Vice President</div>
+        <div class="member-name">박서윤<span class="en">Seoyoon Park</span></div>
+      </div>
+      <div class="member-track">CONSUMER · BRAND</div>
+    </div>
+    <div class="member-card">
+      <div>
+        <div class="member-role">Research Lead</div>
+        <div class="member-name">이도현<span class="en">Dohyun Lee</span></div>
+      </div>
+      <div class="member-track">MOBILITY · INDUSTRIAL</div>
+    </div>
+    <div class="member-card">
+      <div>
+        <div class="member-role">Editor</div>
+        <div class="member-name">최은서<span class="en">Eunseo Choi</span></div>
+      </div>
+      <div class="member-track">TECH · PLATFORM</div>
+    </div>
+    <div class="member-card">
+      <div>
+        <div class="member-role">Analyst</div>
+        <div class="member-name">한지수<span class="en">Jisoo Han</span></div>
+      </div>
+      <div class="member-track">FINANCE · CAPITAL</div>
+    </div>
+    <div class="member-card">
+      <div>
+        <div class="member-role">Analyst</div>
+        <div class="member-name">정민호<span class="en">Minho Jung</span></div>
+      </div>
+      <div class="member-track">MEDIA · IP</div>
+    </div>
+    <div class="member-card">
+      <div>
+        <div class="member-role">Analyst</div>
+        <div class="member-name">윤지원<span class="en">Jiwon Yoon</span></div>
+      </div>
+      <div class="member-track">HEALTHCARE · PHARMA</div>
+    </div>
+    <div class="member-card">
+      <div>
+        <div class="member-role">Analyst</div>
+        <div class="member-name">강태호<span class="en">Taeho Kang</span></div>
+      </div>
+      <div class="member-track">ENERGY · MATERIALS</div>
+    </div>
+  </div>
+
+  <a href="#" class="view-all" style="margin-top: 48px;">View Full Roster →</a>
+</section>
+
+<!-- ───────── RECRUIT ───────── -->
+<section class="recruit" id="recruit">
+  <div class="recruit-inner">
+    <div>
+      <div class="section-label">— Join the 2nd Cohort</div>
+      <h2>
+        Refract your<br>
+        <span class="italic">strategic</span><br>
+        thinking.
+      </h2>
+      <p class="recruit-tagline">
+        학년·전공 무관. 산업과 전략에 대한 집요한 호기심을 가진 학생을 찾습니다.
+      </p>
+    </div>
+    <div>
+      <div class="recruit-info">
+        <div class="recruit-info-item">
+          <h4>대상</h4>
+          <div class="primary">재학생 · 졸업생</div>
+          <div class="secondary">전공 무관</div>
+        </div>
+        <div class="recruit-info-item">
+          <h4>활동</h4>
+          <div class="primary">Case · Research · Report</div>
+          <div class="secondary">주 1회 정기 세션</div>
+        </div>
+        <div class="recruit-info-item">
+          <h4>접수</h4>
+          <div class="primary">04.15 → 05.03</div>
+          <div class="secondary">이메일 지원</div>
+        </div>
+        <div class="recruit-info-item">
+          <h4>면접</h4>
+          <div class="primary">05.07 — 05.08</div>
+          <div class="secondary">대면 / 비대면 선택</div>
+        </div>
+      </div>
+      <div class="recruit-cta-row">
+        <a href="mailto:prismsoc.join@gmail.com" class="recruit-btn">Apply via Email →</a>
+        <div class="recruit-deadline">
+          Deadline <strong>05.03 SUN 23:59 KST</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── FOOTER ───────── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-statement">
+      Refracting Korean business <br>
+      strategy <span class="accent">since 2025</span>.
+    </div>
+  </div>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="fm" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#f7c948"/><stop offset="0.5" stop-color="#ee6a2c"/><stop offset="1" stop-color="#e8533f"/>
+            </linearGradient>
+          </defs>
+          <path d="M12 2 L22 20 L2 20 Z" fill="url(#fm)" stroke="#ede3d8" stroke-width="0.8" stroke-opacity="0.55"/>
+        </svg>
+        PRISM
+      </a>
+      <p>다섯 가지 분석축으로 산업과 기업을 분광 해석하는 학부생 경영전략 리서치 학회. Seoul, Republic of Korea.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Research</h4>
+      <ul>
+        <li><a href="#">Articles</a></li>
+        <li><a href="#">Prism Report</a></li>
+        <li><a href="#">Archive</a></li>
+        <li><a href="#">Newsletter</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Society</h4>
+      <ul>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#activities">Activities</a></li>
+        <li><a href="#members">Members</a></li>
+        <li><a href="#recruit">Recruit</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:prismsoc.join@gmail.com">prismsoc.join@gmail.com</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Medium</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 PRISM Society — All rights reserved</span>
+    <span>Vol. I · Issue 03</span>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.filter-tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tabs button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  const reveals = document.querySelectorAll('.section-title, .hero h1, .method-lead, .lens, .activity-item, .member-card, .article-row, .recruit h2');
+  reveals.forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
